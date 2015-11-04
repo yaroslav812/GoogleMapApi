@@ -1,0 +1,26 @@
+ <!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAV3XeR-Zpc8whhuT4epOJ8KO_IlSRl_Y0&sensor=false"></script>
+    <script type="text/javascript">
+        function ShowPositon(x, y) {
+            var mapOptions = {
+                center: new google.maps.LatLng(x, y),
+                zoom: 9,
+                mapTypeId: google.maps.MapTypeId.ROADMAP
+            };
+            var map = new google.maps.Map(document.getElementById("map_canvas"),
+                mapOptions);
+            return (false);
+        }
+    </script>
+
+</head>
+<body onload="ShowPositon(59.940224, 30.308533)">
+    <div id="map_canvas" style="width:400px; height:400px"></div>
+    <button onclick="ShowPositon(59.940224, 30.308533)">Saint-Petersburg</button>
+    <button onclick="ShowPositon(-33.847608, 150.930176)">Sydney</button>
+    <button onclick="ShowPositon(40.711353, -74.002533)">NewYork</button>
+    <button onclick="ShowPositon(51.510452, -0.127716)">London</button>
+</body>
+</html>

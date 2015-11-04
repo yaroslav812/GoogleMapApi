@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+	<meta charset="utf-8" />
+<style type="text/css">
+#map-canvas { width: 500px; height: 400px;}
+#myForm{
+    width: 200px;
+    height:  150px;
+    border: solid #000 1px;
+    background-color: #CCC;
+    padding:  10px;
+    float: left;
+	margin: 15px;
+}
+#myForm label{
+    width:  160px;
+    float: left;
+}
+</style>
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAV3XeR-Zpc8whhuT4epOJ8KO_IlSRl_Y0&sensor=false"></script>
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6/jquery.min.js"></script>
+    <script type="text/javascript">
+	  
+$(document).ready(function(){
+	/* Инициализация карты */
+	var mapOptions = {
+          center: new google.maps.LatLng(59.950246,30.316109),		 
+          zoom: 11
+     };
+     var map = new google.maps.Map(document.getElementById("map-canvas"), mapOptions);
+	 /* Создаем массив координат [x,y,zoom] - [0]Петербург, [1]Москва, [2]Новосибирск */
+	var pos = [ [59.950246,30.316109,11], [55.755826,37.6173,11], [55.016667,82.933333,12] ];
+	var markers = [];
+	/* Помещаем в массив 3 маркера */
+	for(var i=0; i<pos.length; i++){
+		var p = new google.maps.LatLng(pos[i][0], pos[i][1]); 
+		markers[i] = new google.maps.Marker({
+			position: p,
+			visible: false,
+			map: map
+		});
+	}
+	$('#myForm :radio').change(function(e){
+		var i = e.target.id.substr(-1); // Получаем индекс массива
+		map.panTo(markers[i].getPosition());
+		map.setZoom(pos[i][2]);
+	});
+});
+    </script>
+  </head>
+  <body>    
+	<div id="myForm">
+	<fieldset>
+        <legend>Выберете Город</legend>
+        <div>
+            <label><input type="radio" name="radio" id="spb0" checked />Санкт-Петербург</label>            
+        </div>
+        <div>
+            <label><input type="radio" name="radio" id="msk1" />Москва:</label>
+        </div>
+        <div>
+            <label><input type="radio" name="radio" id="nsk2" />Новосибирск</label>            
+        </div>
+    </fieldset>
+	</div>
+	<div id="map-canvas"></div>
+  </body>
+</html>
